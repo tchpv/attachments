@@ -50,18 +50,20 @@ p {
 
 .downloads li {
     margin-bottom: 15px;
-    text-align: center;
+    text-align: left;
     font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.downloads a {
+.pdf-link {
+    font-size: 24px;
     color: #2c3e50;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    font-weight: 500;
+    margin-right: 10px;
 }
 
-.downloads a:hover {
+.pdf-link:hover {
     color: #3498db;
 }
