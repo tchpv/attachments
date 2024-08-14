@@ -62,11 +62,12 @@ p {
 }
 
 .pdf-icon {
-    width: 16px; /* Further reduced size of the icon */
+    width: 16px; /* Adjust size of the icon */
     height: auto;
     margin-right: 8px; /* Slightly reduced margin to fit text better */
 }
 
 .pdf-link:hover {
     color: #3498db;
+    text-decoration: underline; /* Adds underline to text on hover */
 }
