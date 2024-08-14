@@ -49,18 +49,22 @@ p {
 .downloads li {
     margin-bottom: 15px;
     font-size: 1.2em;
+    display: flex;
+    justify-content: center; /* Centering the list items */
+    align-items: center;
 }
 
 .pdf-link {
     font-size: 24px;
     color: #2c3e50;
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.pdf-link svg {
+.pdf-icon {
+    width: 24px; /* Adjust the size of the icon */
+    height: auto;
     margin-right: 10px;
 }
 
