@@ -55,7 +55,6 @@ p {
 }
 
 .pdf-link {
-    font-size: 24px;
     color: #2c3e50;
     text-decoration: none;
     display: flex;
@@ -63,9 +62,9 @@ p {
 }
 
 .pdf-icon {
-    width: 20px; /* Adjust the size of the icon to fit better with the text */
+    width: 16px; /* Further reduced size of the icon */
     height: auto;
-    margin-right: 10px;
+    margin-right: 8px; /* Slightly reduced margin to fit text better */
 }
 
 .pdf-link:hover {
