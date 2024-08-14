@@ -3,28 +3,22 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .container {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
 }
 
 h1 {
     color: #333;
-    margin-top: 20px;
+    text-align: center;
+    margin-top: 50px;
 }
 
 p {
+    text-align: center;
     font-size: 18px;
     margin-top: 10px;
 }
@@ -34,6 +28,7 @@ p {
 }
 
 .downloads h2 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -44,16 +39,13 @@ p {
 
 .downloads li {
     margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .downloads a {
-    color: #e74c3c;
+    color: #3498db;
     text-decoration: none;
-    font-size: 24px;
-    margin-right: 10px;
+    font-weight: bold;
 }
 
 .downloads span {
