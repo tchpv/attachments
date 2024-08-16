@@ -58,30 +58,38 @@
 
     <script>
         const colorPicker = document.getElementById('colorPicker');
-        const addPixelButton = document.getElementById('addPixel');
         const pixelContainer = document.getElementById('pixelContainer');
-
-        // Function to create a new pixel
-        function createPixel() {
-            const pixel = document.createElement('div');
-            pixel.classList.add('pixel');
-            pixel.addEventListener('click', () => {
-                pixel.style.backgroundColor = colorPicker.value;
-            });
-            pixelContainer.appendChild(pixel);
-        }
-
-        // Add pixels to fill the 20cm x 10cm area
         const numberOfColumns = Math.floor(20 * 37.8); // 20 cm in pixels at 96dpi
         const numberOfRows = Math.floor(10 * 37.8); // 10 cm in pixels at 96dpi
         const totalPixels = numberOfColumns * numberOfRows;
 
-        for (let i = 0; i < totalPixels; i++) {
-            createPixel();
+        // Load saved pixel data from localStorage
+        const pixelData = JSON.parse(localStorage.getItem('pixelData')) || [];
+
+        // Function to create a new pixel
+        function createPixel(index) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+
+            // Set the background color from the saved data if it exists
+            if (pixelData[index]) {
+                pixel.style.backgroundColor = pixelData[index];
+            }
+
+            pixel.addEventListener('click', () => {
+                const color = colorPicker.value;
+                pixel.style.backgroundColor = color;
+                pixelData[index] = color;
+                localStorage.setItem('pixelData', JSON.stringify(pixelData));
+            });
+
+            pixelContainer.appendChild(pixel);
         }
 
-        // Add new pixels when the button is clicked
-        addPixelButton.addEventListener('click', createPixel);
+        // Create and display the pixels
+        for (let i = 0; i < totalPixels; i++) {
+            createPixel(i);
+        }
     </script>
 </body>
 </html>
