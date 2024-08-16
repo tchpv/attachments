@@ -22,7 +22,7 @@
 
         #pixelContainer {
             display: grid;
-            grid-template-columns: repeat(auto-fill, 2px);
+            grid-template-columns: repeat(378, 2px); /* 20cm in pixels at 96dpi */
             width: 20cm;
             height: 10cm;
         }
@@ -34,7 +34,7 @@
             cursor: pointer;
         }
 
-        input[type="color"] {
+        input[type="color"], input[type="number"] {
             margin-right: 10px;
         }
 
@@ -46,25 +46,32 @@
             color: white;
             border: none;
             border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #eraseButton {
+            background-color: #f44336;
         }
     </style>
 </head>
 <body>
     <div id="controls">
         <input type="color" id="colorPicker" value="#ff0000">
-        <button id="addPixel">Add Pixel</button>
+        <input type="number" id="eraserWidth" value="1" min="1" max="10" title="Eraser Width">
+        <button id="eraseButton">Erase All</button>
     </div>
     <div id="pixelContainer"></div>
 
     <script>
         const colorPicker = document.getElementById('colorPicker');
         const pixelContainer = document.getElementById('pixelContainer');
-        const numberOfColumns = Math.floor(20 * 37.8); // 20 cm in pixels at 96dpi
-        const numberOfRows = Math.floor(10 * 37.8); // 10 cm in pixels at 96dpi
+        const eraseButton = document.getElementById('eraseButton');
+        const eraserWidthInput = document.getElementById('eraserWidth');
+        const numberOfColumns = 378; // 20cm in pixels at 96dpi
+        const numberOfRows = 189; // 10cm in pixels at 96dpi
         const totalPixels = numberOfColumns * numberOfRows;
 
-        // Load saved pixel data from localStorage
-        const pixelData = JSON.parse(localStorage.getItem('pixelData')) || [];
+        let pixelData = JSON.parse(localStorage.getItem('pixelData')) || [];
 
         // Function to create a new pixel
         function createPixel(index) {
@@ -77,19 +84,80 @@
             }
 
             pixel.addEventListener('click', () => {
+                const eraserWidth = parseInt(eraserWidthInput.value);
                 const color = colorPicker.value;
-                pixel.style.backgroundColor = color;
-                pixelData[index] = color;
+                if (colorPicker.disabled) { // Eraser is enabled
+                    for (let dx = 0; dx < eraserWidth; dx++) {
+                        for (let dy = 0; dy < eraserWidth; dy++) {
+                            const eraseIndex = index + dx + dy * numberOfColumns;
+                            if (eraseIndex < totalPixels && Math.floor(eraseIndex / numberOfColumns) === Math.floor((index + dy * numberOfColumns) / numberOfColumns)) {
+                                pixelContainer.children[eraseIndex].style.backgroundColor = 'white';
+                                pixelData[eraseIndex] = 'white';
+                            }
+                        }
+                    }
+                } else { // Drawing is enabled
+                    pixel.style.backgroundColor = color;
+                    pixelData[index] = color;
+                }
                 localStorage.setItem('pixelData', JSON.stringify(pixelData));
             });
 
             pixelContainer.appendChild(pixel);
         }
 
-        // Create and display the pixels
+        // Create and display the pixels all at once for better performance
+        const fragment = document.createDocumentFragment();
         for (let i = 0; i < totalPixels; i++) {
-            createPixel(i);
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+
+            // Set the background color from the saved data if it exists
+            if (pixelData[i]) {
+                pixel.style.backgroundColor = pixelData[i];
+            }
+
+            pixel.addEventListener('click', () => {
+                const eraserWidth = parseInt(eraserWidthInput.value);
+                const color = colorPicker.value;
+                if (colorPicker.disabled) { // Eraser is enabled
+                    for (let dx = 0; dx < eraserWidth; dx++) {
+                        for (let dy = 0; dy < eraserWidth; dy++) {
+                            const eraseIndex = i + dx + dy * numberOfColumns;
+                            if (eraseIndex < totalPixels && Math.floor(eraseIndex / numberOfColumns) === Math.floor((i + dy * numberOfColumns) / numberOfColumns)) {
+                                pixelContainer.children[eraseIndex].style.backgroundColor = 'white';
+                                pixelData[eraseIndex] = 'white';
+                            }
+                        }
+                    }
+                } else { // Drawing is enabled
+                    pixel.style.backgroundColor = color;
+                    pixelData[i] = color;
+                }
+                localStorage.setItem('pixelData', JSON.stringify(pixelData));
+            });
+
+            fragment.appendChild(pixel);
         }
+        pixelContainer.appendChild(fragment);
+
+        // Erase all pixels
+        eraseButton.addEventListener('click', () => {
+            pixelData = [];
+            localStorage.removeItem('pixelData');
+            for (let i = 0; i < totalPixels; i++) {
+                pixelContainer.children[i].style.backgroundColor = 'white';
+            }
+        });
+
+        // Toggle eraser mode
+        colorPicker.addEventListener('input', () => {
+            colorPicker.disabled = false; // Enable color picking
+        });
+
+        eraserWidthInput.addEventListener('change', () => {
+            colorPicker.disabled = true; // Disable color picking when eraser is active
+        });
     </script>
 </body>
 </html>
