@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        #pixelContainer {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+        }
+
+        .pixel {
+            width: 10px;
+            height: 10px;
+            margin: 1px;
+            background-color: white;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <input type="color" id="colorPicker" value="#ff0000">
+        <button id="addPixel">Add Pixel</button>
+    </div>
+    <div id="pixelContainer"></div>
+
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const addPixelButton = document.getElementById('addPixel');
+        const pixelContainer = document.getElementById('pixelContainer');
+
+        // Function to create a new pixel
+        function createPixel() {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            pixel.addEventListener('click', () => {
+                pixel.style.backgroundColor = colorPicker.value;
+            });
+            pixelContainer.appendChild(pixel);
+        }
+
+        // Add a new pixel when the button is clicked
+        addPixelButton.addEventListener('click', createPixel);
+
+        // Initialize with some pixels
+        for (let i = 0; i < 400; i++) { // 400 pixels to fill a 20x20 area
+            createPixel();
+        }
+    </script>
+</body>
+</html>
