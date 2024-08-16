@@ -69,4 +69,5 @@ p {
 
 .pdf-link:hover {
     color: #3498db;
+    text-decoration: underline;
 }
