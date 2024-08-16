@@ -36,7 +36,7 @@
             align-items: center;
         }
 
-        #emailForm {
+        #authForm {
             margin-bottom: 20px;
         }
 
@@ -46,6 +46,8 @@
             width: 20cm;
             height: 10cm;
             pointer-events: none; /* Disable interaction by default */
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
         }
 
         .pixel {
@@ -59,7 +61,7 @@
             margin-right: 10px;
         }
 
-        input[type="email"] {
+        input[type="text"], input[type="password"] {
             padding: 5px;
             font-size: 16px;
             margin-right: 10px;
@@ -73,38 +75,54 @@
             color: white;
             border: none;
             border-radius: 5px;
+            margin-top: 10px;
         }
 
-        #submitEmail {
+        #loginButton {
             background-color: #008CBA;
+        }
+
+        #zoomInButton, #zoomOutButton {
+            margin-top: 10px;
+            background-color: #555;
         }
     </style>
 </head>
 <body>
     <h1>Collaborative Pixel Art</h1>
-    <p>Welcome to the collaborative pixel art project! Submit your email to start creating your own pixel art. You can only modify squares that are either free or were last modified by you.</p>
+    <p>Welcome to the collaborative pixel art project! Sign up or log in to start creating your own pixel art. You can only modify squares that are either free or were last modified by you.</p>
 
     <div id="controls">
-        <form id="emailForm">
-            <input type="email" id="emailInput" placeholder="Enter your email" required>
-            <button type="submit" id="submitEmail">Submit</button>
+        <form id="authForm">
+            <input type="text" id="usernameInput" placeholder="Username" required>
+            <input type="password" id="passwordInput" placeholder="Password" required>
+            <button type="button" id="signUpButton">Sign Up</button>
+            <button type="button" id="loginButton">Log In</button>
         </form>
         <input type="color" id="colorPicker" value="#ff0000" disabled>
+        <button type="button" id="zoomInButton">Zoom In</button>
+        <button type="button" id="zoomOutButton">Zoom Out</button>
     </div>
 
     <div id="pixelContainer"></div>
 
     <script>
-        const emailForm = document.getElementById('emailForm');
-        const emailInput = document.getElementById('emailInput');
+        const authForm = document.getElementById('authForm');
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const signUpButton = document.getElementById('signUpButton');
+        const loginButton = document.getElementById('loginButton');
         const colorPicker = document.getElementById('colorPicker');
         const pixelContainer = document.getElementById('pixelContainer');
+        const zoomInButton = document.getElementById('zoomInButton');
+        const zoomOutButton = document.getElementById('zoomOutButton');
         const numberOfColumns = 378; // 20cm in pixels at 96dpi
         const numberOfRows = 189; // 10cm in pixels at 96dpi
         const totalPixels = numberOfColumns * numberOfRows;
 
+        let users = JSON.parse(localStorage.getItem('users')) || {};
         let pixelData = JSON.parse(localStorage.getItem('pixelData')) || [];
-        let currentUserEmail = '';
+        let currentUser = null;
 
         // Function to create a new pixel
         function createPixel(index) {
@@ -118,11 +136,11 @@
             }
 
             pixel.addEventListener('click', () => {
-                if (currentUserEmail && (pixel.style.backgroundColor === 'white' || pixel.dataset.owner === currentUserEmail)) {
+                if (currentUser && (pixel.style.backgroundColor === 'white' || pixel.dataset.owner === currentUser)) {
                     const color = colorPicker.value;
                     pixel.style.backgroundColor = color;
-                    pixel.dataset.owner = currentUserEmail;
-                    pixelData[index] = { color: color, owner: currentUserEmail };
+                    pixel.dataset.owner = currentUser;
+                    pixelData[index] = { color: color, owner: currentUser };
                     localStorage.setItem('pixelData', JSON.stringify(pixelData));
                 }
             });
@@ -137,17 +155,56 @@
         }
         pixelContainer.appendChild(fragment);
 
-        // Handle email submission
-        emailForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            currentUserEmail = emailInput.value.trim();
-            if (currentUserEmail) {
-                colorPicker.disabled = false;
-                pixelContainer.style.pointerEvents = 'auto'; // Enable interaction
-                alert(`Welcome, ${currentUserEmail}! You can now start creating your pixel art.`);
+        // Handle sign-up
+        signUpButton.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            if (username && password) {
+                if (users[username]) {
+                    alert('Username already exists! Please choose another.');
+                } else {
+                    users[username] = { password: password };
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Sign up successful! You can now log in.');
+                }
+            } else {
+                alert('Please enter both a username and a password.');
             }
         });
 
+        // Handle login
+        loginButton.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            if (username && password) {
+                if (users[username] && users[username].password === password) {
+                    currentUser = username;
+                    colorPicker.disabled = false;
+                    pixelContainer.style.pointerEvents = 'auto'; // Enable interaction
+                    alert(`Welcome, ${username}! You can now start creating your pixel art.`);
+                } else {
+                    alert('Invalid username or password.');
+                }
+            } else {
+                alert('Please enter both a username and a password.');
+            }
+        });
+
+        // Zoom in and out functionality
+        let zoomLevel = 1;
+        zoomInButton.addEventListener('click', () => {
+            if (zoomLevel < 10) {
+                zoomLevel += 0.5;
+                pixelContainer.style.transform = `scale(${zoomLevel})`;
+            }
+        });
+
+        zoomOutButton.addEventListener('click', () => {
+            if (zoomLevel > 1) {
+                zoomLevel -= 0.5;
+                pixelContainer.style.transform = `scale(${zoomLevel})`;
+            }
+        });
     </script>
 </body>
 </html>
