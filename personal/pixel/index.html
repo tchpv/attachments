@@ -21,17 +21,16 @@
         }
 
         #pixelContainer {
-            display: flex;
-            flex-wrap: wrap;
-            width: 200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 2px);
+            width: 20cm;
+            height: 10cm;
         }
 
         .pixel {
-            width: 10px;
-            height: 10px;
-            margin: 1px;
+            width: 2px;
+            height: 2px;
             background-color: white;
-            border: 1px solid #ccc;
             cursor: pointer;
         }
 
@@ -72,13 +71,17 @@
             pixelContainer.appendChild(pixel);
         }
 
-        // Add a new pixel when the button is clicked
-        addPixelButton.addEventListener('click', createPixel);
+        // Add pixels to fill the 20cm x 10cm area
+        const numberOfColumns = Math.floor(20 * 37.8); // 20 cm in pixels at 96dpi
+        const numberOfRows = Math.floor(10 * 37.8); // 10 cm in pixels at 96dpi
+        const totalPixels = numberOfColumns * numberOfRows;
 
-        // Initialize with some pixels
-        for (let i = 0; i < 400; i++) { // 400 pixels to fill a 20x20 area
+        for (let i = 0; i < totalPixels; i++) {
             createPixel();
         }
+
+        // Add new pixels when the button is clicked
+        addPixelButton.addEventListener('click', createPixel);
     </script>
 </body>
 </html>
