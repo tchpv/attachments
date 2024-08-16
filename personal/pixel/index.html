@@ -133,6 +133,8 @@
             if (pixelData[index]) {
                 pixel.style.backgroundColor = pixelData[index].color;
                 pixel.dataset.owner = pixelData[index].owner;
+            } else {
+                pixel.dataset.owner = ''; // Set default owner to empty
             }
 
             pixel.addEventListener('click', () => {
