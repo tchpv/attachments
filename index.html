@@ -23,6 +23,9 @@
                             <a href="personal/pixel/">Pixel Art</a>
                         </div>
                     </li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -32,7 +35,71 @@
         <div class="hero-content">
             <h2>Welcome to My Personal Website</h2>
             <p>Discover my work, view my CV, and explore my personal projects.</p>
-            <a href="#" class="btn">Explore More</a>
+            <a href="#about" class="btn">Learn More About Me</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h3>About Me</h3>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hi, I'm Theodort Chipev, a passionate developer and designer. I love creating beautiful, user-friendly websites and applications that make a difference. My journey into the world of technology began with a curiosity for how things work and has grown into a full-fledged career.</p>
+                    <p>With experience in various programming languages and design tools, I strive to combine technical expertise with creative problem-solving. My work spans across different domains, from web development to digital art. I am always eager to learn new things and take on challenging projects.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x400" alt="Theodort Chipev">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h3>Portfolio</h3>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 1">
+                    <h4>Project 1</h4>
+                    <p>A description of the first project. It was a fantastic experience building this application.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 2">
+                    <h4>Project 2</h4>
+                    <p>A description of the second project. This project challenged my skills and taught me a lot.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 3">
+                    <h4>Project 3</h4>
+                    <p>This project is one of my favorites. It showcases my ability to design and develop a complex system.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 4">
+                    <h4>Project 4</h4>
+                    <p>A creative project that highlights my skills in pixel art and animation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h3>Contact Me</h3>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </div>
     </section>
 
@@ -54,6 +121,12 @@ website/
 
     <footer>
         <div class="container">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </div>
             <p>&copy; 2024 Theodort Chipev. All rights reserved.</p>
         </div>
     </footer>
