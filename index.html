@@ -8,23 +8,31 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="container">
+        <div class="navbar">
+            <div class="logo">
                 <h1>Theodort Chipev</h1>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="personal/cv/">CV</a></li>
-                    <li><a href="personal/cv/attachments/">Attachments</a></li>
-                    <li><a href="personal/pixel/">Pixel Art</a></li>
-                </ul>
             </div>
-        </nav>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Personal</a>
+                        <div class="dropdown-content">
+                            <a href="personal/cv/">CV</a>
+                            <a href="personal/cv/attachments/">Attachments</a>
+                            <a href="personal/pixel/">Pixel Art</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <section class="hero">
-        <div class="container">
+        <div class="hero-content">
             <h2>Welcome to My Personal Website</h2>
             <p>Discover my work, view my CV, and explore my personal projects.</p>
+            <a href="#" class="btn">Explore More</a>
         </div>
     </section>
 
