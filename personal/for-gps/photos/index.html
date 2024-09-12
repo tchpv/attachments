@@ -3,14 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://www.dropbox.com/scl/fo/vo7a0k3wuimt58qeb7hx3/AJNC6e4dIt5MzL11ajI0Bls?rlkey=d2cga5i2cylg6a6yag6xsvac9&dl=0">
-    <title>Redirecting...</title>
-    <script type="text/javascript">
-        // JavaScript-based redirect (instant)
-        window.location.href = "https://www.dropbox.com/scl/fo/vo7a0k3wuimt58qeb7hx3/AJNC6e4dIt5MzL11ajI0Bls?rlkey=d2cga5i2cylg6a6yag6xsvac9&dl=0";
-    </script>
+    <title>Password Protected Redirect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #password-form {
+            display: inline-block;
+        }
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="https://www.dropbox.com/scl/fo/vo7a0k3wuimt58qeb7hx3/AJNC6e4dIt5MzL11ajI0Bls?rlkey=d2cga5i2cylg6a6yag6xsvac9&dl=0">link</a>.</p>
+
+<h1>Enter Password to Access the Page</h1>
+
+<div id="password-form">
+    <input type="password" id="password-input" placeholder="Enter Password" required>
+    <input type="submit" value="Submit" onclick="checkPassword()">
+    <p id="error-message" class="error"></p>
+</div>
+
+<script>
+    function checkPassword() {
+        // Get the password entered by the user
+        var enteredPassword = document.getElementById('password-input').value;
+        
+        // The correct password (case-insensitive)
+        var correctPassword = "FKypQ2X";
+        
+        // Compare the entered password to the correct password (ignoring case)
+        if (enteredPassword.toLowerCase() === correctPassword.toLowerCase()) {
+            // If the password is correct, redirect to the Dropbox URL
+            window.location.href = "https://www.dropbox.com/scl/fo/vo7a0k3wuimt58qeb7hx3/AJNC6e4dIt5MzL11ajI0Bls?rlkey=d2cga5i2cylg6a6yag6xsvac9&dl=0";
+        } else {
+            // If the password is incorrect, show an error message
+            document.getElementById('error-message').innerText = "Incorrect password. Please try again.";
+        }
+    }
+</script>
+
 </body>
 </html>
