@@ -1,0 +1,23 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+    }
+    #password-form {
+        display: inline-block;
+    }
+    input[type="password"] {
+        padding: 10px;
+        margin: 10px;
+        font-size: 16px;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .error {
+        color: red;
+    }
+</style>
