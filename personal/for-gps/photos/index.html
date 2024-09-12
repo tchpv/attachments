@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Protected Redirect</title>
+    <title>Защитен с парола достъп</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@
         #password-form {
             display: inline-block;
         }
-        input[type="password"] {
+        input[type="text"] {
             padding: 10px;
             margin: 10px;
             font-size: 16px;
@@ -30,29 +30,29 @@
 </head>
 <body>
 
-<h1>Enter Password to Access the Page</h1>
+<h1>Въведете парола за достъп до страницата</h1>
 
 <div id="password-form">
-    <input type="password" id="password-input" placeholder="Enter Password" required>
-    <input type="submit" value="Submit" onclick="checkPassword()">
+    <input type="text" id="password-input" placeholder="Въведете парола" required>
+    <input type="submit" value="Изпрати" onclick="checkPassword()">
     <p id="error-message" class="error"></p>
 </div>
 
 <script>
     function checkPassword() {
-        // Get the password entered by the user
+        // Вземете паролата, въведена от потребителя
         var enteredPassword = document.getElementById('password-input').value;
         
-        // The correct password (case-insensitive)
+        // Правилната парола (чувствителност към малки и главни букви)
         var correctPassword = "FKypQ2X";
         
-        // Compare the entered password to the correct password (ignoring case)
+        // Сравнете въведената парола с правилната (игнориране на големи/малки букви)
         if (enteredPassword.toLowerCase() === correctPassword.toLowerCase()) {
-            // If the password is correct, redirect to the Dropbox URL
+            // Ако паролата е правилна, пренасочете към уебсайта на Dropbox
             window.location.href = "https://www.dropbox.com/scl/fo/vo7a0k3wuimt58qeb7hx3/AJNC6e4dIt5MzL11ajI0Bls?rlkey=d2cga5i2cylg6a6yag6xsvac9&dl=0";
         } else {
-            // If the password is incorrect, show an error message
-            document.getElementById('error-message').innerText = "Incorrect password. Please try again.";
+            // Ако паролата е грешна, покажете съобщение за грешка
+            document.getElementById('error-message').innerText = "Грешна парола. Моля, опитайте отново.";
         }
     }
 </script>
