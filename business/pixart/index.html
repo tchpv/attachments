@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Pixel Art Marketplace</h1>
+    <div id="userInfo">
+        <span id="loginMessage">Please login or register to start creating art!</span>
+        <button onclick="showLoginForm()">Login</button>
+        <button onclick="showRegisterForm()">Register</button>
+    </div>
+</header>
+
+<section id="instructions">
+    <h2>Instructions & Pricing</h2>
+    <p>Select squares and paint pixel art! Price per square: </p>
+    <ul>
+        <li>1 square (16x16px): €0.01</li>
+        <li>10 squares (160x160px): €0.09</li>
+        <li>100 squares (1600x1600px): €0.75</li>
+        <li>1000 squares (16,000x16,000px): €6.00</li>
+    </ul>
+    <p>Users can edit their purchased squares or sell them to others. The website charges 10% commission on sales.</p>
+</section>
+
+<section id="canvasSection">
+    <h2>Pixel Art Canvas (1000x1000px)</h2>
+    <div id="canvasContainer"></div>
+</section>
+
+<section id="chatSection">
+    <h2>Messages</h2>
+    <div id="chatBox">
+        <div id="messages"></div>
+    </div>
+    <input type="text" id="chatInput" placeholder="Send a message..." />
+    <button onclick="sendMessage()">Send</button>
+</section>
+
+<!-- Modals for login and registration -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('loginModal')">&times;</span>
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('registerModal')">&times;</span>
+        <h2>Register</h2>
+        <input type="text" id="registerUsername" placeholder="Username">
+        <input type="email" id="registerEmail" placeholder="Email">
+        <input type="password" id="registerPassword" placeholder="Password">
+        <button onclick="register()">Register</button>
+    </div>
+</div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
