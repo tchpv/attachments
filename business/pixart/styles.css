@@ -1,0 +1,103 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#userInfo {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#instructions {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+#canvasSection {
+    padding: 20px;
+    text-align: center;
+}
+
+#canvasContainer {
+    display: grid;
+    grid-template-columns: repeat(62, 16px);
+    grid-template-rows: repeat(62, 16px);
+    gap: 1px;
+    justify-content: center;
+    background-color: #ddd;
+}
+
+.pixel {
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.pixel:hover {
+    cursor: pointer;
+    border-color: black;
+}
+
+#chatSection {
+    margin: 20px;
+}
+
+#chatBox {
+    width: 80%;
+    height: 200px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+#chatInput {
+    width: 70%;
+    padding: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #333;
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal input {
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.modal button {
+    padding: 10px;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
